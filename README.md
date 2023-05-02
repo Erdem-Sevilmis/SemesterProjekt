@@ -48,7 +48,3 @@ This project was developed by [Erdem Sevilmis](https://github.com/Erdem-Sevilmis
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Contributing
-
-If you would like to contribute to this project, please fork the repository and submit a pull request. We welcome all contributions!
