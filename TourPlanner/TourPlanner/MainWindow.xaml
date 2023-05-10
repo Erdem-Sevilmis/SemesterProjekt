@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TourPlanner"
         xmlns:controls="clr-namespace:TourPlanner.Controls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        x:Name="Window1" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="325" />
@@ -14,7 +14,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <WrapPanel Grid.Row="0" Grid.Column="0"  VerticalAlignment="Center" HorizontalAlignment="Left">
@@ -25,6 +25,9 @@
         </WrapPanel>
 
         <controls:SearchBar Grid.Row="1" Grid.Column="0"></controls:SearchBar>
+
+        <controls:TourControl DataContext="{Binding ElementName=Window1, Path=ManageToursViewModel}" MaxWidth="312" Grid.Row="2" Grid.Column="0" Margin="3,10,0,0"></controls:TourControl>
+        
         
     </Grid>
 </Window>

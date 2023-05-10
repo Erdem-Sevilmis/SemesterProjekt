@@ -1,0 +1,107 @@
+﻿<UserControl x:Class="TourPlanner.Controls.TourControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TourPlanner.Controls"
+             mc:Ignorable="d" 
+             Loaded="TourControlLoaded"
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <Border BorderBrush="Black" BorderThickness="1">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid>
+
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5">Tours</TextBlock>
+                <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <Button Width="20" Height="18"  Margin="0,0,5,0" Command="{Binding AddTourCommand}">+
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                    <Button Width="20" Height="18"  Margin="0,0,5,0">-
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                    <Button Width="20" Height="18"  Margin="0,0,5,0">...
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </WrapPanel>
+            </Grid>
+
+            <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1" Margin="5" CornerRadius="4">
+                <Grid x:Name="TourEntriesGrid">
+                    <ScrollViewer
+                        Width="Auto"
+                        VerticalScrollBarVisibility="Disabled"
+                        HorizontalScrollBarVisibility="Auto">
+
+
+
+                        <ItemsControl
+                x:Name="SearchResultList"                
+                ItemsSource="{Binding Path=CurrentTours, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel x:Name="TourItemControlWrapPanel" Width="Auto" Orientation="Vertical"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+
+                                    <StackPanel Width="Auto" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0">
+                                        <TextBlock HorizontalAlignment="Center"
+                                                   Text="{Binding}">
+
+                                        </TextBlock>
+                                        <Separator Name="MySeparator"
+                                                   Width="{Binding ActualWidth, ElementName=TourItemControlWrapPanel}"
+                                                   HorizontalAlignment="Stretch"
+                                                   VerticalAlignment="Top"                   
+                                                   Background="Black" />
+                                    </StackPanel>
+                                    
+
+
+                                    <!--<Border
+                            Margin="5"
+                            BorderThickness="1"
+                            BorderBrush="Aqua">
+
+                                        <TextBlock
+                                Text="{Binding}"
+                                HorizontalAlignment="Center"                               
+                                VerticalAlignment="Top"
+                                FontSize="12"
+                                TextWrapping="Wrap"
+                                TextAlignment="Center"
+                                FontWeight="DemiBold"  
+                                Width="150"
+                                Height="150" />
+                                    </Border>-->
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>
