@@ -4,9 +4,27 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TourPlanner"
+        xmlns:controls="clr-namespace:TourPlanner.Controls"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="325" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <WrapPanel Grid.Row="0" Grid.Column="0"  VerticalAlignment="Center" HorizontalAlignment="Left">
+            <Button Width="80" Height="20">File</Button>
+            <Button Width="80" Height="20">Edit</Button>
+            <Button Width="80" Height="20">Options</Button>
+            <Button Width="80" Height="20">Help</Button>
+        </WrapPanel>
 
+        <controls:SearchBar Grid.Row="1" Grid.Column="0"></controls:SearchBar>
+        
     </Grid>
 </Window>
