@@ -54,7 +54,7 @@
 
                         <ItemsControl
                 x:Name="SearchResultList"                
-                ItemsSource="{Binding Path=CurrentTours, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                ItemsSource="{Binding Path=CurrentTours, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
@@ -66,7 +66,7 @@
                                 <DataTemplate>
 
                                     <StackPanel Width="Auto" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0">
-                                        <TextBlock HorizontalAlignment="Center"
+                      -                  <TextBlock HorizontalAlignment="Center"
                                                    Text="{Binding}">
 
                                         </TextBlock>
