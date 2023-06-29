@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TourPlanner.Commands;
 
 namespace TourPlanner.Controls
 {
@@ -40,9 +39,17 @@ namespace TourPlanner.Controls
             string someTest = "";
         }
 
-        //private void Button_Click(object sender, RoutedEventArgs e)
-        //{
-        //    AddTourCommand.Execute(null);
-        //}
+        public static readonly DependencyProperty TourControlViewModelProperty = DependencyProperty.Register(
+                  "TourControlView",
+                  typeof(object),
+                  typeof(UserControl),
+                  new PropertyMetadata(null)
+              );
+        public object TourControlViewModel
+        {
+            get { return (object)GetValue(TourControlViewModelProperty); }
+            set { SetValue(TourControlViewModelProperty, value); }
+        }
+
     }
 }
