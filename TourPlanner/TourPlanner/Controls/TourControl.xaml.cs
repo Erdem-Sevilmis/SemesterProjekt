@@ -24,7 +24,6 @@ namespace TourPlanner.Controls
         {
             InitializeComponent();
             DataContextChanged += new DependencyPropertyChangedEventHandler(UserControl1_DataContextChanged);
-            
             string test = "asd";
         }
 

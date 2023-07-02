@@ -11,6 +11,8 @@ namespace TourPlanner.Viewmodels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        protected TourPlannerContext dbContext = new TourPlannerContext();
+
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

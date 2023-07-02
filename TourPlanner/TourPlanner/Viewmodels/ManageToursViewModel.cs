@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using TourPlanner.Models;
+using TourPlanner.Views;
 
 namespace TourPlanner.Viewmodels
 {
@@ -12,13 +15,31 @@ namespace TourPlanner.Viewmodels
 
         public ManageToursViewModel()
         {
-            CurrentTours = new List<string>
-            {
-                "test1",
-                "test2",
-                "Test3"
-            };
+            //CurrentTours = new List<string>
+            //{
+            //    "test1",
+            //    "test2",
+            //    "Test3"
+            //};
+            GetAllToursFromDatabase();
             AddTourCommand = new Commands.AddTourCommand(this);
+        }
+
+        public List<Tour> Tours { get; set; } = new();
+
+        public void GetAllToursFromDatabase()
+        {
+            Tours = dbContext.Tours.ToList();
+        }
+
+        public void AddTourToDatabase(string test)
+        {
+            CreateTourPopupWindow popup = new CreateTourPopupWindow();
+            popup.ShowDialog();
+
+            //string testOneValue = test;
+            //CurrentTours.Add(testOneValue);
+            string testTwo = "a";
         }
 
         private List<string> _currentTours;

@@ -50,9 +50,15 @@
                         VerticalScrollBarVisibility="Disabled"
                         HorizontalScrollBarVisibility="Auto">
 
+                        <ListBox x:Name="toursListBox" ItemsSource="{Binding Path=Tours, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}" />
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
 
-
-                        <ItemsControl
+                        <!--<ItemsControl
                 x:Name="SearchResultList"                
                 ItemsSource="{Binding Path=CurrentTours, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
 
@@ -79,26 +85,11 @@
                                     
 
 
-                                    <!--<Border
-                            Margin="5"
-                            BorderThickness="1"
-                            BorderBrush="Aqua">
-
-                                        <TextBlock
-                                Text="{Binding}"
-                                HorizontalAlignment="Center"                               
-                                VerticalAlignment="Top"
-                                FontSize="12"
-                                TextWrapping="Wrap"
-                                TextAlignment="Center"
-                                FontWeight="DemiBold"  
-                                Width="150"
-                                Height="150" />
-                                    </Border>-->
+                               
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
 
-                        </ItemsControl>
+                        </ItemsControl>-->
                     </ScrollViewer>
                 </Grid>
             </Border>
