@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TourPlanner.Models;
+using TourPlanner.Viewmodels;
 
 namespace TourPlanner.Controls
 {
@@ -34,9 +36,25 @@ namespace TourPlanner.Controls
 
         void UserControl1_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            // You can also validate the data going into the DataContext using the event args
+
             string someTest = "";
         }
+
+        private void ExportButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            var selectedItem = (Tour)((Button)sender).DataContext;
+
+            ManageToursViewModel viewModel = DataContext as ManageToursViewModel;
+            if (viewModel != null)
+            {
+                viewModel.ExportTourToPdf(selectedItem);
+
+            }
+
+        }
+
+
 
         public static readonly DependencyProperty TourControlViewModelProperty = DependencyProperty.Register(
                   "TourControlView",

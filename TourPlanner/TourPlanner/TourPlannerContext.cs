@@ -14,6 +14,8 @@ namespace TourPlanner
     {
         public DbSet<Tour> Tours { get; set; }
 
+        public DbSet<TourLog> TourLogs { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             string configFilePath = "D:\\FH Software Engineering\\Zweites Semester\\Semesterprojekt\\TourPlanner\\TourPlanner\\TourPlanner\\appsettings.json";

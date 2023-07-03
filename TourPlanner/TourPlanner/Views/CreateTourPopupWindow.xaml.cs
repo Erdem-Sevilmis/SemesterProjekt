@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TourPlanner.Viewmodels;
 
 namespace TourPlanner.Views
 {
@@ -19,9 +20,21 @@ namespace TourPlanner.Views
     /// </summary>
     public partial class CreateTourPopupWindow : Window
     {
-        public CreateTourPopupWindow()
+
+        private ManageToursViewModel viewModel;
+        public CreateTourPopupWindow(ManageToursViewModel vm)
         {
             InitializeComponent();
+            viewModel = vm;
+            DataContext = viewModel;
+        }
+
+        private void CreateButton_Click(object sender, RoutedEventArgs e)
+        {
+         
+            viewModel.AddTourToDatabase(NameTextBox.Text, FromTextBox.Text, ToTextBox.Text, TransportTypeTextBox.Text);
+
+            Close();
         }
     }
 }

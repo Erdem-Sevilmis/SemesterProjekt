@@ -20,7 +20,7 @@ namespace TourPlanner.Commands
         public override void Execute(object? parameter)
         {
             //_manageToursViewModel.CurrentTours.Add("ExampleTour");
-            _manageToursViewModel.AddTourToDatabase("TESTXTOUR");
+            _manageToursViewModel.OpenCreateTourPopup();
         }
     }
 }
