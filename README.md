@@ -1,21 +1,19 @@
 # Tour Planner
 
-Tour Planner is a project developed by a team of two students, which is a graphical-user-interface application based on WPF. The goal of this project is to allow users to create and manage tours (bike, hike, running, or vacation) in advance, as well as keep logs and statistical data of completed tours. 
-
-## Requirements
+Tour Planner is a project developed by a team of two students [Erdem Sevilmis](https://github.com/Erdem-Sevilmis) and [Koale837](https://github.com/Koale8730). This project is a graphical-user-interface application based on WPF. The goal of this project is to allow users to create and manage tours (bike, hike, running, or vacation) in advance, as well as keep logs and statistical data of completed tours. 
 
 ### Goals
 - Implement a graphical-user-interface based on WPF
 - Apply the MVVM-pattern in C#
 - Implement a layer-based architecture with a UI Layer, a business layer (BL), and a data access layer (DAL)
-- Implement design-patterns in your project
-- Define your own reusable UI-component
-- Store the tour-data and tour-logs in a PostgreSQL database; images should be stored externally on the filesystem
-- Use a logging framework like log4net or log4j
-- Generate a report by using an appropriate library of your choice
-- Generate your own unit-tests with JUnit or NUnit
-- Keep your configuration (DB connection, base directory) in a separate config-file - not in the compiled source code
-- Document your application architecture and structure as well as the development process and key decisions using UML and wireframes
+- Implement design-patterns in this project
+- Define our own reusable UI-component
+- Store the tour-data and tour-logs in a PostgreSQL database; images are stored externally on the filesystem
+- Use of a logging framework like log4net
+- Generating a report by using an appropriate library
+- Writing our own unit-tests with JUnit
+- Keeping our configuration (DB connection, base directory) in a separate config-file - not in the compiled source code
+- Documenting our application architecture and structure as well as the development process and key decisions using UML and wireframes
 
 ### Features
 - The user can create new tours (no user management, login, registration... everybody sees all tours)
