@@ -7,19 +7,19 @@ using TourPlanner.Viewmodels;
 
 namespace TourPlanner.Commands
 {
-    public class AddTourCommand : CommandBase
+    public class EditTourCommand : CommandBase
     {
         private ManageToursViewModel _manageToursViewModel;
 
-        public AddTourCommand(ManageToursViewModel manageToursViewModel)
+        public EditTourCommand(ManageToursViewModel manageToursViewModel)
         {
             _manageToursViewModel = manageToursViewModel;
-            
+
         }
 
         public override void Execute(object? parameter)
         {
-            _manageToursViewModel.OpenCreateTourPopup();
+            //_manageToursViewModel.OpenEditTourPopup();
         }
     }
 }

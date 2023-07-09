@@ -58,14 +58,28 @@ namespace TourPlanner.Controls
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
 
-         
+            var selectedItem = (Tour)((Button)sender).DataContext;
 
+            ManageToursViewModel viewModel = DataContext as ManageToursViewModel;
+            if (viewModel != null)
+            {
+                viewModel.OpenEditTourPopup(selectedItem);
+
+            }
+            
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
 
+            var selectedItem = (Tour)((Button)sender).DataContext;
 
+            ManageToursViewModel viewModel = DataContext as ManageToursViewModel;
+            if (viewModel != null)
+            {
+                viewModel.DeleteTourFromDb(selectedItem);
+
+            }
 
         }
 

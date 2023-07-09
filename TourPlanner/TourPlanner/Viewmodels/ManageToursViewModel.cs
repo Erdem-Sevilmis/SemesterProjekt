@@ -56,10 +56,18 @@ namespace TourPlanner.Viewmodels
         {
             CreateTourPopupWindow popup = new CreateTourPopupWindow(this);
             popup.ShowDialog();
+        }
 
-            //string testOneValue = test;
-            //CurrentTours.Add(testOneValue);
-            
+        public void OpenEditTourPopup(Tour tourToEdit)
+        {
+            EditTourPopupWindow popup = new EditTourPopupWindow(this, tourToEdit.Id, tourToEdit.Name, tourToEdit.From, tourToEdit.To, tourToEdit.TransportType);
+            popup.ShowDialog();
+        }
+
+        public void DeleteTourFromDb(Tour tourToDelete)
+        {
+            dbContext.Tours.Remove(tourToDelete);
+            dbContext.SaveChanges();
         }
 
         public void ChangeCurrentSelectedTour(Tour newSelection)
@@ -202,6 +210,39 @@ namespace TourPlanner.Viewmodels
         {
             using (WebClient webClient = new WebClient())
                 return webClient.DownloadData(uri);
+        }
+
+        public void EditTourToDatabase(int oldTourId, string Name, string From, string To, string TranportType)
+        {
+
+            var results = GetTimeAndDistance(new Uri("https://www.mapquestapi.com/directions/v2/route?key=RWjNFiNXi7QJ5jmjgYM7mjujwDcF3ebG&from=" + From.Replace(' ', '+') + "&to=" + To.Replace(' ', '+') + "&unit=k"));
+            TimeSpan tourTime = results.time;
+            double tourDistance = results.distance;
+            var image = GetImage(new Uri("https://www.mapquestapi.com/staticmap/v5/map?start=" + From.Replace(' ', '+') + "&end=" + To.Replace(' ', '+') + "&size=600,400@2x&key=RWjNFiNXi7QJ5jmjgYM7mjujwDcF3ebG"));
+            int imageId = GetImageId();
+            SafeImageWithId(imageId, image);
+
+            var newTour = new Tour
+            {
+                Name = Name,
+                From = From,
+                To = To,
+                TransportType = TranportType,
+                Time = tourTime,
+                Distance = tourDistance,
+                ImageId = imageId
+            };
+
+            Tour tourToEdit = dbContext.Tours.Where(x => x.Id == oldTourId).FirstOrDefault();
+            tourToEdit.Name = Name;
+            tourToEdit.From = From;
+            tourToEdit.To = To;
+            tourToEdit.TransportType = TranportType;
+            tourToEdit.Distance = tourDistance;
+            tourToEdit.ImageId = imageId;
+            dbContext.SaveChanges();
+
+            GetAllToursFromDatabase();
         }
 
         public void AddTourToDatabase(string Name, string From, string To, string TranportType)

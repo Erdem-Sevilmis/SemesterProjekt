@@ -73,6 +73,11 @@
                                                     <Trigger Property="IsMouseOver" Value="True">
                                                         <Setter TargetName="border" Property="Background" Value="#E8E8E8"/>
                                                     </Trigger>
+                                                    <Trigger Property="IsSelected" Value="True">
+                                                        <Setter TargetName="border" Property="Background" Value="#2196F3"/>
+                                                        <Setter TargetName="border" Property="BorderBrush" Value="White"/>
+                                                        <!--<Setter TargetName="border" Property="Foreground" Value="White"/>-->
+                                                    </Trigger>
                                                 </ControlTemplate.Triggers>
                                             </ControlTemplate>
                                         </Setter.Value>
