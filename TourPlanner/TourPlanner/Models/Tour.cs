@@ -22,6 +22,7 @@ namespace TourPlanner.Models
         public string TransportType { get; set; }
         public double? Distance { get; set; }
         public TimeSpan? Time { get; set; }
+        public int? ImageId { get; set; }
 
         public List<TourLog> TourLogs { get; set; }
 

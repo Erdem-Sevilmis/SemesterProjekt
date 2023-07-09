@@ -22,11 +22,16 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using TourPlanner.Models;
 using TourPlanner.Views;
+using System.Collections;
+using System.Windows.Media.Imaging;
 
 namespace TourPlanner.Viewmodels
 {
     public class ManageToursViewModel : ViewModelBase
     {
+
+        public Tour CurrentSelectedTour { get; set; }
+        public event EventHandler CurrentSelectedTourUpdated;
 
         public ManageToursViewModel()
         {
@@ -55,6 +60,12 @@ namespace TourPlanner.Viewmodels
             //string testOneValue = test;
             //CurrentTours.Add(testOneValue);
             
+        }
+
+        public void ChangeCurrentSelectedTour(Tour newSelection)
+        {
+            CurrentSelectedTour = newSelection;
+            CurrentSelectedTourUpdated.Invoke(this, EventArgs.Empty);
         }
 
         public void ExportTourToPdf(Tour tourToExport)
@@ -113,7 +124,7 @@ namespace TourPlanner.Viewmodels
 
             var image = GetImage(new Uri("https://www.mapquestapi.com/staticmap/v5/map?start=" + tourToExport.From.Replace(' ', '+') + "&end=" + tourToExport.To.Replace(' ', '+') + "&size=600,400@2x&key=RWjNFiNXi7QJ5jmjgYM7mjujwDcF3ebG"));
             CreatePDF(image, tourToExport);
-            string test = "bin drin";
+
         }
 
         private void CreatePDF(byte[] image, Tour pdfTour)
@@ -199,6 +210,9 @@ namespace TourPlanner.Viewmodels
             var results = GetTimeAndDistance(new Uri("https://www.mapquestapi.com/directions/v2/route?key=RWjNFiNXi7QJ5jmjgYM7mjujwDcF3ebG&from=" + From.Replace(' ', '+') + "&to=" + To.Replace(' ', '+') + "&unit=k"));
             TimeSpan tourTime = results.time;
             double tourDistance = results.distance;
+            var image = GetImage(new Uri("https://www.mapquestapi.com/staticmap/v5/map?start=" + From.Replace(' ', '+') + "&end=" + To.Replace(' ', '+') + "&size=600,400@2x&key=RWjNFiNXi7QJ5jmjgYM7mjujwDcF3ebG"));
+            int imageId = GetImageId();
+            SafeImageWithId(imageId, image);
 
             var newTour = new Tour
             {
@@ -207,13 +221,66 @@ namespace TourPlanner.Viewmodels
                 To = To,
                 TransportType = TranportType,
                 Time = tourTime,
-                Distance = tourDistance
+                Distance = tourDistance,
+                ImageId = imageId
             };
 
             dbContext.Tours.Add(newTour);
             dbContext.SaveChanges();
 
             GetAllToursFromDatabase();
+        }
+
+        private int GetImageId()
+        {
+            string currentFolderPath = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName + "\\Images";
+
+            if (!Directory.Exists(currentFolderPath))
+            {
+                throw new DirectoryNotFoundException($"Folder '{currentFolderPath}' does not exist.");
+            }
+
+            string[] fileNames = Directory.GetFiles(currentFolderPath);
+
+            int variable = 1;
+            bool isDifferent = false;
+            while (!isDifferent)
+            {
+                isDifferent = true;
+                foreach (string fileName in fileNames)
+                {
+                    if (int.TryParse(Path.GetFileNameWithoutExtension(fileName), out int parsedValue))
+                    {
+                        if (variable == parsedValue)
+                        {
+                            variable++;
+                            isDifferent = false;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return variable;
+        }
+
+        private void SafeImageWithId(int imageId, byte[] imageBytes)
+        {
+
+            string currentFolderPath = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName + "\\Images";
+            using (MemoryStream stream = new MemoryStream(imageBytes))
+            {
+                BitmapDecoder decoder = BitmapDecoder.Create(stream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
+                BitmapFrame frame = decoder.Frames[0];
+
+                JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+                encoder.Frames.Add(frame);
+
+                using (FileStream output = new FileStream(currentFolderPath + "\\" + imageId + ".jpg", FileMode.Create))
+                {
+                    encoder.Save(output);
+                }
+            }
         }
 
         public (float distance, TimeSpan time) GetTimeAndDistance(Uri uri)

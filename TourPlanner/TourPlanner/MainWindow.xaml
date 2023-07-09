@@ -27,7 +27,8 @@
         <controls:SearchBar Grid.Row="1" Grid.Column="0"></controls:SearchBar>
 
         <controls:TourControl DataContext="{Binding ElementName=Window1, Path=ManageToursViewModel}" MaxWidth="312" Grid.Row="2" Grid.Column="0" Margin="3,10,0,0"></controls:TourControl>
-        
-        
+
+        <controls:TourImageControl DataContext="{Binding ElementName=Window1, Path=ManageToursViewModel}" Grid.Column="1" Grid.RowSpan="3" MaxWidth="400" MaxHeight="260"
+                                     Margin="0,0,0,130"></controls:TourImageControl>
     </Grid>
 </Window>

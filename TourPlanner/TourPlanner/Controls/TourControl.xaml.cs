@@ -22,6 +22,7 @@ namespace TourPlanner.Controls
     /// </summary>
     public partial class TourControl : UserControl
     {
+
         public TourControl()
         {
             InitializeComponent();
@@ -52,6 +53,32 @@ namespace TourPlanner.Controls
 
             }
 
+        }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+
+         
+
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+
+
+
+        }
+
+        private void myListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            var selectedItem = (Tour)toursListBox.SelectedItem;
+            ManageToursViewModel viewModel = DataContext as ManageToursViewModel;
+            if (viewModel != null)
+            {
+                viewModel.ChangeCurrentSelectedTour(selectedItem);
+
+            }
         }
 
 
