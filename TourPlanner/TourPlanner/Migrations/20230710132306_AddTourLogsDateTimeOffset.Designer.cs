@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TourPlanner;
@@ -11,9 +12,11 @@ using TourPlanner;
 namespace TourPlanner.Migrations
 {
     [DbContext(typeof(TourPlannerContext))]
-    partial class TourPlannerContextModelSnapshot : ModelSnapshot
+    [Migration("20230710132306_AddTourLogsDateTimeOffset")]
+    partial class AddTourLogsDateTimeOffset
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,7 +89,7 @@ namespace TourPlanner.Migrations
                     b.Property<TimeSpan?>("TotalTime")
                         .HasColumnType("interval");
 
-                    b.Property<int>("TourId")
+                    b.Property<int?>("TourId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -98,13 +101,9 @@ namespace TourPlanner.Migrations
 
             modelBuilder.Entity("TourPlanner.Models.TourLog", b =>
                 {
-                    b.HasOne("TourPlanner.Models.Tour", "Tour")
+                    b.HasOne("TourPlanner.Models.Tour", null)
                         .WithMany("TourLogs")
-                        .HasForeignKey("TourId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Tour");
+                        .HasForeignKey("TourId");
                 });
 
             modelBuilder.Entity("TourPlanner.Models.Tour", b =>

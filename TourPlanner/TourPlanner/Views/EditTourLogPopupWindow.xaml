@@ -1,0 +1,84 @@
+﻿<Window x:Class="TourPlanner.Views.EditTourLogPopupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TourPlanner.Views"
+        mc:Ignorable="d"
+        Title="EditTourLogPopupWindow" Height="330" Width="500">
+    <Border BorderBrush="Black" BorderThickness="2" Background="#F5F5F5" CornerRadius="5">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!-- Title -->
+            <Border Grid.Row="0" Background="#1976D2" CornerRadius="5,5,0,0">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="White" Margin="10">Edit TourLog</TextBlock>
+            </Border>
+
+            <!-- Columns -->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- First Column (OLD Values) -->
+                <StackPanel Grid.Column="0" Margin="10">
+                    <TextBlock Text="OLD Values" FontWeight="Bold" Margin="0,5" Foreground="#1976D2" />
+                    <WrapPanel>
+                        <TextBlock Text="Comment:" Margin="0,5" Foreground="#1976D2" />
+                        <TextBlock x:Name="OldComment" Text="{Binding OldComment}" Margin="0,5" />
+                    </WrapPanel>
+                    <WrapPanel>
+                        <TextBlock Text="Date/Time:" Margin="0,5" Foreground="#1976D2" />
+                        <TextBlock x:Name="DateAndTime" Text="{Binding OldDateTime}" Margin="0,5" />
+                    </WrapPanel>
+                    <WrapPanel>
+                        <TextBlock Text="Difficulty:" Margin="0,5" Foreground="#1976D2" />
+                        <TextBlock x:Name="Difficulty" Text="{Binding OldDifficulty}" Margin="0,5" />
+                    </WrapPanel>
+                    <WrapPanel>
+                        <TextBlock Text="TotalTime:" Margin="0,5" Foreground="#1976D2" />
+                        <TextBlock x:Name="TotalTime" Text="{Binding OldTotalTime}" Margin="0,5" />
+                    </WrapPanel>
+                    <WrapPanel>
+                        <TextBlock Text="Rating:" Margin="0,5" Foreground="#1976D2" />
+                        <TextBlock x:Name="Rating" Text="{Binding OldRating}" Margin="0,5" />
+                    </WrapPanel>
+                </StackPanel>
+
+                <!-- Second Column (NEW Values) -->
+                <StackPanel Grid.Column="1" Margin="10">
+                    <TextBlock Text="NEW Values" FontWeight="Bold" Margin="0,5" Foreground="#1976D2" />
+                    <TextBox x:Name="NewCommentTextBox" Margin="0,5" BorderBrush="#1976D2" BorderThickness="1" Background="#F5F5F5" />
+                    <TextBox x:Name="NewDateTimeTextBox" Margin="0,5" BorderBrush="#1976D2" BorderThickness="1" Background="#F5F5F5" />
+                    <TextBox x:Name="NewDifficultyTextBox" Margin="0,5" BorderBrush="#1976D2" BorderThickness="1" Background="#F5F5F5" />
+                    <TextBox x:Name="NewTotalTimeTextBox" Margin="0,5" BorderBrush="#1976D2" BorderThickness="1" Background="#F5F5F5" />
+                    <TextBox x:Name="NewRatingTextBox" Margin="0,5" BorderBrush="#1976D2" BorderThickness="1" Background="#F5F5F5" />
+                </StackPanel>
+            </Grid>
+
+            <!-- Button (Save) -->
+            <Button Grid.Row="2" HorizontalAlignment="Center" Margin="10" Width="100" Content="Save" Click="SaveButton_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="#2196F3" BorderBrush="#1976D2" BorderThickness="1" CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="#1976D2" />
+                                <Setter Property="Foreground" Value="White" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Grid>
+    </Border>
+
+</Window>

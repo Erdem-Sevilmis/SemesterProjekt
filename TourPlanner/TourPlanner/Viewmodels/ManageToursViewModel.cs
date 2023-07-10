@@ -24,13 +24,28 @@ using TourPlanner.Models;
 using TourPlanner.Views;
 using System.Collections;
 using System.Windows.Media.Imaging;
+using static log4net.Appender.RollingFileAppender;
 
 namespace TourPlanner.Viewmodels
 {
     public class ManageToursViewModel : ViewModelBase
     {
-
-        public Tour CurrentSelectedTour { get; set; }
+        public List<TourLog> logsOfCurrentTour = new List<TourLog>();
+        private Tour _currentSelectedTour;
+        public Tour CurrentSelectedTour {
+            get { return _currentSelectedTour; } 
+            set {
+                _currentSelectedTour = value;
+                logsOfCurrentTour = new List<TourLog>();
+                foreach (TourLog tourLog in dbContext.TourLogs)
+                {
+                    if(_currentSelectedTour.Id == tourLog.TourId)
+                    {
+                        logsOfCurrentTour.Add(tourLog);
+                    }
+                }
+            } 
+        }
         public event EventHandler CurrentSelectedTourUpdated;
 
         public ManageToursViewModel()
@@ -61,6 +76,18 @@ namespace TourPlanner.Viewmodels
         public void OpenEditTourPopup(Tour tourToEdit)
         {
             EditTourPopupWindow popup = new EditTourPopupWindow(this, tourToEdit.Id, tourToEdit.Name, tourToEdit.From, tourToEdit.To, tourToEdit.TransportType);
+            popup.ShowDialog();
+        }
+
+        public void OpenCreateTourLogPopup()
+        {
+            CreateTourLogPopupWindow popup = new CreateTourLogPopupWindow(this);
+            popup.ShowDialog();
+        }
+
+        public void OpenEditTourLogPopup(TourLog tourLogToEdit)
+        {
+            EditTourLogPopupWindow popup = new EditTourLogPopupWindow(this, tourLogToEdit);
             popup.ShowDialog();
         }
 
@@ -187,7 +214,7 @@ namespace TourPlanner.Viewmodels
                     tourLogs.AddCell(tourlog.DateAndTime.ToString());
                     tourLogs.AddCell(tourlog.Comment);
                     tourLogs.AddCell(tourlog.Difficulty.ToString());
-                    tourLogs.AddCell(tourlog.TotalTime.ToString(@"hh\:mm\:ss"));
+                    tourLogs.AddCell(tourlog.TotalTime.ToString());
                     tourLogs.AddCell($"{tourlog.Rating}/5");
                 }
             }
@@ -212,6 +239,41 @@ namespace TourPlanner.Viewmodels
                 return webClient.DownloadData(uri);
         }
 
+        public void EditTourLogToDatabase(int oldTourId, string Comment, string DateAndTime, string Difficulty, string TotalTime, string Rating)
+        {
+            DateTimeOffset dateTimeOffset;
+            if (DateTimeOffset.TryParse(DateAndTime, out dateTimeOffset))
+            {
+                // Parsing successful
+                //Console.WriteLine(dateTimeOffset);
+            }
+            else
+            {
+                // Parsing failed
+                dateTimeOffset = DateTimeOffset.Now;
+            }
+            TimeSpan timeSpan;
+            if (TimeSpan.TryParse(TotalTime, out timeSpan))
+            {
+                // Parsing successful
+                //Console.WriteLine(timeSpan);
+            }
+            else
+            {
+                // Parsing failed
+                timeSpan = TimeSpan.Zero;
+            }
+            TourLog tourLogToEdit = dbContext.TourLogs.Where(x => x.Id == oldTourId).FirstOrDefault();
+            tourLogToEdit.Comment = Comment;
+            tourLogToEdit.DateAndTime = dateTimeOffset;
+            tourLogToEdit.Difficulty = Difficulty;
+            tourLogToEdit.TotalTime = timeSpan;
+            tourLogToEdit.Rating = int.Parse(Rating);
+            dbContext.SaveChanges();
+
+            GetAllToursFromDatabase();
+        }
+
         public void EditTourToDatabase(int oldTourId, string Name, string From, string To, string TranportType)
         {
 
@@ -222,16 +284,7 @@ namespace TourPlanner.Viewmodels
             int imageId = GetImageId();
             SafeImageWithId(imageId, image);
 
-            var newTour = new Tour
-            {
-                Name = Name,
-                From = From,
-                To = To,
-                TransportType = TranportType,
-                Time = tourTime,
-                Distance = tourDistance,
-                ImageId = imageId
-            };
+            
 
             Tour tourToEdit = dbContext.Tours.Where(x => x.Id == oldTourId).FirstOrDefault();
             tourToEdit.Name = Name;
@@ -267,6 +320,36 @@ namespace TourPlanner.Viewmodels
             };
 
             dbContext.Tours.Add(newTour);
+            dbContext.SaveChanges();
+
+            GetAllToursFromDatabase();
+        }
+
+        public void AddTourLogToDatabase(string Comment, string DateAndTime, string Difficulty, string TotalTime, string Rating)
+        {
+
+            //DateTime Example: "2023-07-08";
+
+            DateTimeOffset dateTime;
+            if (DateTimeOffset.TryParse(DateAndTime, out dateTime))
+            {
+               
+            }
+            else
+            {
+                dateTime = DateTimeOffset.UtcNow;
+            }
+            var newTourLog = new TourLog
+            {
+                Comment = Comment,
+                DateAndTime = dateTime,
+                Difficulty = Difficulty,
+                TotalTime = TimeSpan.Parse(TotalTime),
+                Rating = int.Parse(Rating)
+            };
+            Tour tourToEdit = dbContext.Tours.Where(x => x.Id == CurrentSelectedTour.Id).FirstOrDefault();
+            tourToEdit.TourLogs = new List<TourLog>();
+            tourToEdit.TourLogs.Add(newTourLog);
             dbContext.SaveChanges();
 
             GetAllToursFromDatabase();
