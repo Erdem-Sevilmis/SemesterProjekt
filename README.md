@@ -64,6 +64,28 @@ To use this application, you will need to clone this repository and open it in y
 | 09.07.2023 | 3h    |
 | 10.07.2023 | 2h    |
 
+
+## Application Features 
+> UML Use Case Diagram
+
+![](images/UML-Use-Case.png)
+
+## UI Flow
+> Insert Wireframes here
+
+## #Application Architecture
+> UML Class Diagram:
+
+![](images/UML-Class.png)
+
+> UML Sequence Diagram:
+
+![](images/UML-SEQ.png)
+
+## Unit Tests
+> Why were this tests chosen?
+> Why is the tested code critical?
+
 ## Credits
 
 This project was developed by [Erdem Sevilmis](https://github.com/Erdem-Sevilmis) and [Koale837](https://github.com/Koale8730) as part of SS2023-SWEN2 at [FH Technikum Wien](https://www.technikum-wien.at/). Special thanks to [RaoulHolzer](https://github.com/RaoulHolzer) for the guidance and support throughout the project. 
