@@ -66,25 +66,28 @@ To use this application, you will need to clone this repository and open it in y
 
 
 ## Application Features 
-> UML Use Case Diagram
 
+**UML Use Case Diagram**
 ![](images/UML-Use-Case.png)
 
 ## UI Flow
 > Insert Wireframes here
 
-## #Application Architecture
-> UML Class Diagram:
+## Application Architecture
 
+**UML Class Diagram:**
 ![](images/UML-Class.png)
 
-> UML Sequence Diagram:
-
+**UML Sequence Diagram:**
 ![](images/UML-SEQ.png)
 
 ## Unit Tests
-> Why were this tests chosen?
-> Why is the tested code critical?
+
+**Why were these tests chosen?**  
+The tests were selected based on their criticality to the project. It was crucial to thoroughly test these components as they play a vital role in ensuring the project's success.
+**Why is the tested code critical?**  
+The tested code holds utmost importance as it serves as the foundation of the project. It plays a pivotal role in determining the functionality and overall success of the project.
+
 
 ## Credits
 
