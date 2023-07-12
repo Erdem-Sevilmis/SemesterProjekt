@@ -97,6 +97,12 @@ namespace TourPlanner.Viewmodels
             dbContext.SaveChanges();
         }
 
+        public void DeleteTourLogFromDb(TourLog tourLogToDelete)
+        {
+            dbContext.TourLogs.Remove(tourLogToDelete);
+            dbContext.SaveChanges();
+        }
+
         public void ChangeCurrentSelectedTour(Tour newSelection)
         {
             CurrentSelectedTour = newSelection;
@@ -250,7 +256,7 @@ namespace TourPlanner.Viewmodels
             else
             {
                 // Parsing failed
-                dateTimeOffset = DateTimeOffset.Now;
+                dateTimeOffset = DateTimeOffset.UtcNow;
             }
             TimeSpan timeSpan;
             if (TimeSpan.TryParse(TotalTime, out timeSpan))
@@ -339,16 +345,28 @@ namespace TourPlanner.Viewmodels
             {
                 dateTime = DateTimeOffset.UtcNow;
             }
+            TimeSpan timeSpan;
+            if (TimeSpan.TryParse(TotalTime, out timeSpan))
+            {
+                // Parsing successful
+                //Console.WriteLine(timeSpan);
+            }
+            else
+            {
+                // Parsing failed
+                timeSpan = TimeSpan.Zero;
+            }
             var newTourLog = new TourLog
             {
                 Comment = Comment,
                 DateAndTime = dateTime,
                 Difficulty = Difficulty,
-                TotalTime = TimeSpan.Parse(TotalTime),
+                TotalTime = timeSpan,
                 Rating = int.Parse(Rating)
             };
             Tour tourToEdit = dbContext.Tours.Where(x => x.Id == CurrentSelectedTour.Id).FirstOrDefault();
             tourToEdit.TourLogs = new List<TourLog>();
+            tourToEdit.TourLogs = logsOfCurrentTour;
             tourToEdit.TourLogs.Add(newTourLog);
             dbContext.SaveChanges();
 

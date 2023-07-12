@@ -77,7 +77,8 @@ namespace TourPlanner.Controls
         }
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            CurrentViewModel.OpenCreateTourLogPopup();
+            var selectedItem = (TourLog)((Button)sender).DataContext;
+            CurrentViewModel.DeleteTourLogFromDb(selectedItem);
         }
 
     }
