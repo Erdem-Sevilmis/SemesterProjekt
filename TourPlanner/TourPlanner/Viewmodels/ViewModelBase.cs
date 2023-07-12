@@ -11,7 +11,7 @@ namespace TourPlanner.Viewmodels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected TourPlannerContext dbContext = new TourPlannerContext();
+        protected DAL.TourPlannerContext dbContext = new DAL.TourPlannerContext();
 
         protected void OnPropertyChanged(string propertyName)
         {

@@ -5,12 +5,11 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TourPlanner.Models
+namespace DAL.Models
 {
     public class Tour
     {
         
-
         public int Id { get; set; }
 
         public string Name { get; set; }

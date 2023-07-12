@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using TourPlanner.Models;
+using DAL.Models;
 using TourPlanner.Viewmodels;
 
 namespace TourPlanner.Views

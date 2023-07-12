@@ -20,7 +20,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using TourPlanner.Models;
+using DAL.Models;
 using TourPlanner.Views;
 using System.Collections;
 using System.Windows.Media.Imaging;
