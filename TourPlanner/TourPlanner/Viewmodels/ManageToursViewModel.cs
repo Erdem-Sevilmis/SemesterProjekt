@@ -27,11 +27,14 @@ using System.Windows.Media.Imaging;
 using static log4net.Appender.RollingFileAppender;
 using DAL;
 using BL;
+using log4net.Config;
 
 namespace TourPlanner.Viewmodels
 {
     public class ManageToursViewModel : ViewModelBase
     {
+        private static readonly log4net.ILog _log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         //DataManager dataManagerForView;
         //TourManager tourLogicManagerForView;
         public event EventHandler CurrentSelectedTourUpdated;
@@ -73,6 +76,7 @@ namespace TourPlanner.Viewmodels
             //};
             Tours = TourPlannerDataManager.GetAllToursFromDatabase();
             AddTourCommand = new Commands.AddTourCommand(this);
+            XmlConfigurator.Configure(new FileInfo("log4net.config"));
         }
 
 
@@ -81,26 +85,54 @@ namespace TourPlanner.Viewmodels
 
         public void OpenCreateTourPopup()
         {
-            CreateTourPopupWindow popup = new CreateTourPopupWindow(this);
-            popup.ShowDialog();
+            try
+            {
+                CreateTourPopupWindow popup = new CreateTourPopupWindow(this);
+                popup.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                _log.Error("Error opening CreateTourPopupWindow", ex);
+            }
         }
 
         public void OpenEditTourPopup(Tour tourToEdit)
         {
-            EditTourPopupWindow popup = new EditTourPopupWindow(this, tourToEdit.Id, tourToEdit.Name, tourToEdit.From, tourToEdit.To, tourToEdit.TransportType);
-            popup.ShowDialog();
+            try
+            {
+                EditTourPopupWindow popup = new EditTourPopupWindow(this, tourToEdit.Id, tourToEdit.Name, tourToEdit.From, tourToEdit.To, tourToEdit.TransportType);
+                popup.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                _log.Error("Error opening EditTourPopupWindow", ex);
+            }
         }
 
         public void OpenCreateTourLogPopup()
         {
-            CreateTourLogPopupWindow popup = new CreateTourLogPopupWindow(this);
-            popup.ShowDialog();
+            try
+            {
+                CreateTourLogPopupWindow popup = new CreateTourLogPopupWindow(this);
+                popup.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                _log.Error("Error opening CreateTourLogPopupWindow", ex);
+            }
         }
 
         public void OpenEditTourLogPopup(TourLog tourLogToEdit)
         {
-            EditTourLogPopupWindow popup = new EditTourLogPopupWindow(this, tourLogToEdit);
-            popup.ShowDialog();
+            try
+            {
+                EditTourLogPopupWindow popup = new EditTourLogPopupWindow(this, tourLogToEdit);
+                popup.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                _log.Error("Error opening EditTourLogPopupWindow", ex);
+            }
         }
 
 
@@ -117,9 +149,14 @@ namespace TourPlanner.Viewmodels
             int imageId = TourPlannerLogicManager.GetImageId();
             SafeImageWithId(imageId, image);
 
-
-            TourPlannerLogicManager.EditTourToDatabaseLogic(oldTourId, Name, From, To, TranportType, tourDistance, tourTime, imageId);
-
+            try
+            {
+                TourPlannerLogicManager.EditTourToDatabaseLogic(oldTourId, Name, From, To, TranportType, tourDistance, tourTime, imageId);
+            }
+            catch (Exception ex)
+            {
+                _log.Error("Error editing tour", ex);
+            }
 
         }
         public void AddTourToDatabase(string Name, string From, string To, string TranportType)
@@ -131,10 +168,18 @@ namespace TourPlanner.Viewmodels
             int imageId = TourPlannerLogicManager.GetImageId();
             SafeImageWithId(imageId, image);
 
-            TourPlannerLogicManager.AddTourToDatabaseLogic(Name, From, To, TranportType, tourTime, tourDistance, imageId);
+
+            try
+            {
+                TourPlannerLogicManager.AddTourToDatabaseLogic(Name, From, To, TranportType, tourTime, tourDistance, imageId);
+            }
+            catch (Exception ex)
+            {
+                _log.Error("Error adding tour", ex);
+            }
         }
 
-        
+
 
         private void SafeImageWithId(int imageId, byte[] imageBytes)
         {
