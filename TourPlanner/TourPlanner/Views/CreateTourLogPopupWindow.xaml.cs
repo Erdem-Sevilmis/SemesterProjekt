@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,7 +33,7 @@ namespace TourPlanner.Views
         {
 
             //viewModel.AddTourToDatabase(NameTextBox.Text, FromTextBox.Text, ToTextBox.Text, TransportTypeTextBox.Text);
-            viewModel.AddTourLogToDatabase(CommentTextBox.Text, DateAndTimeTextBox.Text, DifficultyTextBox.Text, TotalTimeTextBox.Text, RatingTextBox.Text);
+            viewModel.TourPlannerLogicManager.AddTourLogToDatabase(CommentTextBox.Text, DateAndTimeTextBox.Text, DifficultyTextBox.Text, TotalTimeTextBox.Text, RatingTextBox.Text, viewModel.CurrentSelectedTour.Id, viewModel.logsOfCurrentTour);
 
             Close();
         }

@@ -11,7 +11,16 @@ namespace TourPlanner.Viewmodels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected DAL.TourPlannerContext dbContext = new DAL.TourPlannerContext();
+        //public DAL.TourPlannerContext dbContext;
+        public DAL.DataManager TourPlannerDataManager;
+        public BL.TourManager TourPlannerLogicManager;
+
+        public ViewModelBase()
+        {
+            //dbContext = new DAL.TourPlannerContext();
+            TourPlannerDataManager = new DAL.DataManager();
+            TourPlannerLogicManager = new BL.TourManager(TourPlannerDataManager);
+        }
 
         protected void OnPropertyChanged(string propertyName)
         {

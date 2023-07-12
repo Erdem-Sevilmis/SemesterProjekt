@@ -49,7 +49,7 @@ namespace TourPlanner.Controls
             ManageToursViewModel viewModel = DataContext as ManageToursViewModel;
             if (viewModel != null)
             {
-                viewModel.ExportTourToPdf(selectedItem);
+                viewModel.TourPlannerLogicManager.ExportTourToPdf(selectedItem);
 
             }
 
@@ -77,7 +77,7 @@ namespace TourPlanner.Controls
             ManageToursViewModel viewModel = DataContext as ManageToursViewModel;
             if (viewModel != null)
             {
-                viewModel.DeleteTourFromDb(selectedItem);
+                viewModel.TourPlannerDataManager.DeleteTourFromDb(selectedItem);
 
             }
 

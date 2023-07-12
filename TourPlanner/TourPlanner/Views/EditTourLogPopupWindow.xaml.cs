@@ -40,7 +40,7 @@ namespace TourPlanner.Views
         {
 
             //viewModel.EditTourToDatabase(OldTourId, NewName.Text, NewFrom.Text, NewTo.Text, NewTransportType.Text);
-            viewModel.EditTourLogToDatabase(oldTourLog.Id, NewCommentTextBox.Text, NewDateTimeTextBox.Text, NewDifficultyTextBox.Text, NewTotalTimeTextBox.Text, NewRatingTextBox.Text);
+            viewModel.TourPlannerLogicManager.EditTourLogToDatabase(oldTourLog.Id, NewCommentTextBox.Text, NewDateTimeTextBox.Text, NewDifficultyTextBox.Text, NewTotalTimeTextBox.Text, NewRatingTextBox.Text);
             Close();
         }
     }
