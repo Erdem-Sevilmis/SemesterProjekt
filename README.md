@@ -67,7 +67,8 @@ To use this application, you will need to clone this repository and open it in y
 
 ## Application Features 
 
-**UML Use Case Diagram**
+**UML Use Case Diagram:**
+
 ![](images/UML-Use-Case.png)
 
 ## UI Flow
@@ -76,9 +77,11 @@ To use this application, you will need to clone this repository and open it in y
 ## Application Architecture
 
 **UML Class Diagram:**
+
 ![](images/UML-Class.png)
 
 **UML Sequence Diagram:**
+
 ![](images/UML-SEQ.png)
 
 ## Unit Tests
