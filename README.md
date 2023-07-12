@@ -2,7 +2,7 @@
 
 Tour Planner is a project developed by a team of two students [Erdem Sevilmis](https://github.com/Erdem-Sevilmis) and [Koale837](https://github.com/Koale8730). This project is a graphical-user-interface application based on WPF. The goal of this project is to allow users to create and manage tours (bike, hike, running, or vacation) in advance, as well as keep logs and statistical data of completed tours. 
 
-### Goals
+## Goals
 - Implement a graphical-user-interface based on WPF
 - Apply the MVVM-pattern in C#
 - Implement a layer-based architecture with a UI Layer, a business layer (BL), and a data access layer (DAL)
@@ -15,7 +15,7 @@ Tour Planner is a project developed by a team of two students [Erdem Sevilmis](h
 - Keeping our configuration (DB connection, base directory) in a separate config-file - not in the compiled source code
 - Documenting our application architecture and structure as well as the development process and key decisions using UML and wireframes
 
-### Features
+## Features
 - The user can create new tours (no user management, login, registration... everybody sees all tours)
 - Every tour consists of name, tour description, from, to, transport type, tour distance, estimated time, route information (an image with the tour map)
   - The image, the distance, and the time should be retrieved by a REST request using the MapQuest Directions and Static Map APIs
@@ -38,6 +38,31 @@ Tour Planner is a project developed by a team of two students [Erdem Sevilmis](h
 ## Usage
 
 To use this application, you will need to clone this repository and open it in your preferred IDE. After that, you will need to install the necessary dependencies and set up a PostgreSQL database to store tour data and logs. Once you have set up the environment, you can run the application and start creating tours and tour logs.
+
+## Time Tracking
+| Date       | Hours |
+| ---------- | ----- |
+| 02.05.2023 | 2h    |
+| 04.05.2023 | 1h    |
+| 10.05.2023 | 2h    |
+| 11.05.2023 | 3h    |
+| 17.05.2023 | 2h    |
+| 18.06.2023 | 4h    |
+| 18.06.2023 | 4h    |
+| 21.06.2023 | 2h    |
+| 22.06.2023 | 3h    |
+| 22.06.2023 | 1h    |   
+| 23.06.2023 | 3h    |
+| 25.06.2023 | 2h    |
+| 28.06.2023 | 3h    |
+| 01.07.2023 | 3h    |
+| 03.07.2023 | 2h    |
+| 04.07.2023 | 4h    |
+| 05.07.2023 | 3h    |
+| 06.07.2023 | 2h    |
+| 08.07.2023 | 4h    |
+| 09.07.2023 | 3h    |
+| 10.07.2023 | 2h    |
 
 ## Credits
 
