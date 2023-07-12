@@ -64,17 +64,62 @@ To use this application, you will need to clone this repository and open it in y
 | 09.07.2023 | 3h    |
 | 10.07.2023 | 2h    |
 
+# Technical Steps and Decisions we made
+**Framework:** WPF  
+**Architecture:** MVVM  
+**Data Storage:** Entityframwork  
+**Design Patterns:** Factory Pattern  
+**UI Components:** Subviews  
+**Logging:** Log4net  
+**Unit Tests:** Nunit  
+**Report Generation:** iText7  
+**Features:** Creating Tours, Creating Tourlogs, Edit Tours, Edit tourlogs, Import Tours, Export tours, generate PDF including all infos of the Tour.  
 
-## Application Features 
+Key decisions were made to ensure success in this project. The user interface was built using the WPF framework, taking advantage of its rich set of components and capabilities.
+To improve maintainability, we separated our application into Model, View, and ViewModel components.
+
+Entity Framework is a robust ORM framework that we chose for efficient data storage and management. By utilizing Entity Framework, we were able to interact with the underlying database seamlessly, perform CRUD operations, and manage tour-related data effectively.
+
+The Factory Pattern was used to handle object creation. A consistent and reliable approach to the application can be provided by this design pattern.
+
+
+To ensure comprehensive logging and monitoring, we integrated Log4net into the project. Log4net facilitated the capturing and tracking of valuable information, including debug messages, exceptions, and warnings. By leveraging Log4net, we could effectively troubleshoot issues, monitor the applications behavior, and ensure a smooth user experience.
+
+NUnit was used as our unit testing framework to maintain code quality and verify the correctness of our implementation. With the help of NUnit, we were able to write and execute unit tests to make sure that the components we used met the desired specifications.
+
+For generating comprehensive reports, we integrated iText7, a powerful PDF generation library. All the necessary information about the tours was included in the PDF documents. The tours essential information could be used to generate detailed reports.
+
+## UI Flow
+This is the MainWindow which is used to navigate through the application.
+
+![](images/MainWindow.png)
+
+This Pop-Up is shown when pressed on the + button to create a new Tour. All the necesary info must be provided.
+
+![](images/CreateTourPopUp.png)
+
+The newly created Tour can be edited by pressing the yellow edit button next to the name of the tour.
+
+![](images/EditTourPopUp.png)
+
+This Pop-Up is shown when pressed on the + button, on the right bottom of the map, to create a new TourLog. All the necesary info must be provided.
+
+![](images/CreateTourLogPopUp.png)
+
+The newly created TourLog can be edited by pressing the yellow edit button.
+
+![](images/EditTourLogPopUp.png)
+
+By pressing the green Export button next to the tour name. You will be provided with a PDF which includes all info about the tour.
+
+![](images/PDF.png)
+
+
+## Application Architecture
 
 **UML Use Case Diagram:**
 
 ![](images/UML-Use-Case.png)
-
-## UI Flow
-> Insert Wireframes here
-
-## Application Architecture
 
 **UML Class Diagram:**
 
@@ -87,7 +132,8 @@ To use this application, you will need to clone this repository and open it in y
 ## Unit Tests
 
 **Why were these tests chosen?**  
-The tests were selected based on their criticality to the project. It was crucial to thoroughly test these components as they play a vital role in ensuring the project's success.
+The tests were selected based on their criticality to the project. It was crucial to thoroughly test these components as they play a vital role in ensuring the project's success. 
+
 **Why is the tested code critical?**  
 The tested code holds utmost importance as it serves as the foundation of the project. It plays a pivotal role in determining the functionality and overall success of the project.
 
@@ -99,3 +145,6 @@ This project was developed by [Erdem Sevilmis](https://github.com/Erdem-Sevilmis
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Link to the [repository](https://github.com/Erdem-Sevilmis/TourPlanner)
+
