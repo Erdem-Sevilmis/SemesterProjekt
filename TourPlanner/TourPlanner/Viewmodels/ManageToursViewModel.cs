@@ -157,21 +157,6 @@ namespace TourPlanner.Viewmodels
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         private List<string> _currentTours;
 
         public List<string> CurrentTours

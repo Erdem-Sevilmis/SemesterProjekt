@@ -40,7 +40,7 @@ namespace BL
     {
         
 
-        private readonly DataManager _dataManager;
+        public DataManager _dataManager;
         public TourManager(DataManager dataManager)
         {
             _dataManager = dataManager;
